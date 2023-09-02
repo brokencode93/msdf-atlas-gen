@@ -4,10 +4,10 @@ project "msdf-atlas-gen"
 	kind "StaticLib"
 	language "C++"
 	cppdialect "C++17"
-    staticruntime "off"
+ 	staticruntime "off"
 
-	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+	targetdir (buildbindir .. "/%{prj.name}")
+	objdir  (buildintdir .. "/%{prj.name}")
 
 	files
 	{
@@ -38,13 +38,15 @@ project "msdf-atlas-gen"
 
 	filter "configurations:Debug"
 		runtime "Debug"
+		optimize "off"
 		symbols "on"
 
 	filter "configurations:Release"
 		runtime "Release"
-		optimize "on"
+		optimize "speed"
+		symbols "on"
 
 	filter "configurations:Dist"
 		runtime "Release"
-		optimize "on"
-        symbols "off"
+		optimize "speed"
+        	symbols "off"
